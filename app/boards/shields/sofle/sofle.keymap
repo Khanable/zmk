@@ -12,11 +12,8 @@
 
 
 /*
- * Temporarily here because nice nano v2 spi is not defined on ZMK Yet
- * Source: https://github.com/zmkfirmware/zmk/blob/main/app/boards/shields/reviung41/boards/nice_nano.overlay
- * GitHub Issue: https://github.com/zmkfirmware/zmk/issues/885
- */
-
+* Supermini nrf52840 pin differences from nice_nano_v2 and chain length
+*/
 #include <dt-bindings/led/led.h>
 
 &pinctrl {
@@ -44,18 +41,21 @@
 
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
-        label = "WS2812";
 
         /* SPI */
         reg = <0>; /* ignored, but necessary for SPI bindings */
         spi-max-frequency = <4000000>;
 
         /* WS2812 */
-        chain-length = <30>;
+        chain-length = <30>; /* arbitrary; change at will */
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
 
-        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
+        color-mapping = <
+            LED_COLOR_ID_GREEN
+            LED_COLOR_ID_RED
+            LED_COLOR_ID_BLUE
+        >;
     };
 };
 
@@ -64,8 +64,6 @@
         zmk,underglow = &led_strip;
     };
 };
-
-/* END temporary RGB support section */
 
 #define BASE 0
 #define LOWER 1
@@ -135,7 +133,7 @@
 //                |      |       |       |      |      |  |      |      |      |       |      |
             bindings = <
 &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                  &trans    &trans    &trans   &trans    &trans  &trans
-&trans     &kp INS      &kp PSCRN    &kp K_CMENU  &trans       &trans                        &kp PG_UP &trans    &kp UP   &trans    &kp N0  &trans
+&trans     &kp INS      &kp PSCRN    &kp K_CMENU  &trans       &trans                        &kp PG_UP &trans    &kp UP   &trans    &trans  &trans
 &trans     &kp LALT     &kp LCTRL    &kp LSHFT    &trans       &kp CLCK                      &kp PG_DN &kp LEFT  &kp DOWN &kp RIGHT &kp DEL &kp BSPC
 &trans     &kp K_UNDO   &kp K_CUT    &kp K_COPY   &kp K_PASTE  &trans        &trans  &trans  &trans    &trans    &trans   &trans    &trans  &trans
                         &trans       &trans       &trans       &trans        &trans  &trans  &trans    &trans    &trans   &trans

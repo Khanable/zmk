@@ -11,6 +11,8 @@ features:
   - encoder
   - underglow
   - studio
+  - dongle
 siblings:
   - sofle_left
   - sofle_right
+  - sofle_dongle
