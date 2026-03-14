@@ -13,6 +13,9 @@
 
 /*
 * Supermini nrf52840 pin differences from nice_nano_v2 and chain length
+* Wonder if could move this to each left/right overlay (just the chain length)
+* Then the dongle could have a seperate chain length of 1 and I could put one on it
+* Should make a seperate sofle-type and just override the nice_nano_v2.overlay for the pin differences
 */
 #include <dt-bindings/led/led.h>
 
